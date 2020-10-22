@@ -33,19 +33,19 @@ public:
 
 	void NativeUpdateAnimation(float DeltaSeconds) override;
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category = ALS)
 	void PlayTransition(const FALSDynamicMontageParams& Parameters);
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category = ALS)
 	void PlayTransitionChecked(const FALSDynamicMontageParams& Parameters);
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category = ALS)
 	void PlayDynamicTransition(float ReTriggerDelay, FALSDynamicMontageParams Parameters);
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category = ALS)
 	void OnJumped();
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category = ALS)
 	void OnPivot();
 
 	UFUNCTION(BlueprintCallable, Category = "Grounded")
@@ -172,7 +172,7 @@ private:
 
 protected:
 	/** References */
-	UPROPERTY(BlueprintReadOnly)
+	UPROPERTY(BlueprintReadOnly, Category = ALS)
 	AALSBaseCharacter* Character = nullptr;
 
 	/** Character Information */

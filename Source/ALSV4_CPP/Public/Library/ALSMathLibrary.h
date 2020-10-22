@@ -24,39 +24,39 @@ class ALSV4_CPP_API UALSMathLibrary : public UBlueprintFunctionLibrary
 	GENERATED_BODY()
 
 public:
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category = ALS)
 	static FTransform MantleComponentLocalToWorld(const FALSComponentAndTransform& CompAndTransform);
 
 	static TPair<float, float> FixDiagonalGamepadValues(float Y, float X);
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category = ALS)
 	static FTransform TransfromSub(const FTransform& T1, const FTransform& T2)
 	{
 		return FTransform(T1.GetRotation().Rotator() - T2.GetRotation().Rotator(),
 		                  T1.GetLocation() - T2.GetLocation(), T1.GetScale3D() - T2.GetScale3D());
 	}
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category = ALS)
 	static FTransform TransfromAdd(const FTransform& T1, const FTransform& T2)
 	{
 		return FTransform(T1.GetRotation().Rotator() + T2.GetRotation().Rotator(),
 		                  T1.GetLocation() + T2.GetLocation(), T1.GetScale3D() + T2.GetScale3D());
 	}
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category = ALS)
 	static FVector GetCapsuleBaseLocation(float ZOffset, UCapsuleComponent* Capsule);
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category = ALS)
 	static FVector GetCapsuleLocationFromBase(FVector BaseLocation, float ZOffset, UCapsuleComponent* Capsule);
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category = ALS)
 	static bool CapsuleHasRoomCheck(UCapsuleComponent* Capsule, FVector TargetLocation, float HeightOffset,
 	                                float RadiusOffset);
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category = ALS)
 	static bool AngleInRange(float Angle, float MinAngle, float MaxAngle, float Buffer, bool IncreaseBuffer);
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category = ALS)
 	static EALSMovementDirection CalculateQuadrant(EALSMovementDirection Current, float FRThreshold, float FLThreshold, float BRThreshold,
 	                                               float BLThreshold, float Buffer, float Angle);
 };

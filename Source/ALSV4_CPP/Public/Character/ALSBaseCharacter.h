@@ -314,7 +314,7 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "ALS|Essential Information")
 	void SetSpeed(float NewSpeed);
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category = "ALS|Essential Information")
 	FRotator GetAimingRotation() const { return AimingRotation; }
 
 	UFUNCTION(BlueprintGetter, Category = "ALS|Essential Information")
@@ -660,7 +660,7 @@ protected:
 
 	float PreviousAimYaw = 0.0f;
 
-	UPROPERTY(BlueprintReadOnly)
+	UPROPERTY(BlueprintReadOnly, Catregory = ALS)
 	UALSCharacterAnimInstance* MainAnimInstance = nullptr;
 
 	/** Last time the 'first' crouch/roll button is pressed */
