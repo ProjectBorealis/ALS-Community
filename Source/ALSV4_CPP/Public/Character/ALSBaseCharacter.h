@@ -660,7 +660,7 @@ protected:
 
 	float PreviousAimYaw = 0.0f;
 
-	UPROPERTY(BlueprintReadOnly, Catregory = ALS)
+	UPROPERTY(BlueprintReadOnly, Category = ALS)
 	UALSCharacterAnimInstance* MainAnimInstance = nullptr;
 
 	/** Last time the 'first' crouch/roll button is pressed */
