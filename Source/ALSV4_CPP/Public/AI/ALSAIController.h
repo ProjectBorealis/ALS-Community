@@ -1,9 +1,9 @@
 // Project:         Advanced Locomotion System V4 on C++
-// Copyright:       Copyright (C) 2020 Doğa Can Yanıkoğlu
+// Copyright:       Copyright (C) 2021 Doğa Can Yanıkoğlu
 // License:         MIT License (http://www.opensource.org/licenses/mit-license.php)
 // Source Code:     https://github.com/dyanikoglu/ALSV4_CPP
 // Original Author: Jens Bjarne Myhre
-// Contributors:    
+// Contributors:    Doğa Can Yanıkoğlu
 
 
 #pragma once
@@ -29,4 +29,6 @@ public:
 
 protected:
 	virtual void OnPossess(APawn* InPawn) override;
+
+	virtual FVector GetFocalPointOnActor(const AActor *Actor) const override;
 };

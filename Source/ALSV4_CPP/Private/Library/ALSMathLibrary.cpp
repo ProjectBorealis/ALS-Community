@@ -1,15 +1,18 @@
 // Project:         Advanced Locomotion System V4 on C++
-// Copyright:       Copyright (C) 2020 Doğa Can Yanıkoğlu
+// Copyright:       Copyright (C) 2021 Doğa Can Yanıkoğlu
 // License:         MIT License (http://www.opensource.org/licenses/mit-license.php)
 // Source Code:     https://github.com/dyanikoglu/ALSV4_CPP
 // Original Author: Doğa Can Yanıkoğlu
-// Contributors:    
+// Contributors:    Achim Turan
 
 
 #include "Library/ALSMathLibrary.h"
 
-#include "Components/CapsuleComponent.h"
+
 #include "Library/ALSCharacterStructLibrary.h"
+#include "Components/ALSDebugComponent.h"
+
+#include "Components/CapsuleComponent.h"
 
 FTransform UALSMathLibrary::MantleComponentLocalToWorld(const FALSComponentAndTransform& CompAndTransform)
 {
@@ -20,13 +23,13 @@ FTransform UALSMathLibrary::MantleComponentLocalToWorld(const FALSComponentAndTr
 	return {Quat, Location, Scale};
 }
 
-TPair<float, float> UALSMathLibrary::FixDiagonalGamepadValues(const float Y, const float X)
+TPair<float, float> UALSMathLibrary::FixDiagonalGamepadValues(const float X, const float Y)
 {
-	float ResultY = Y * FMath::GetMappedRangeValueClamped(FVector2D(0.0f, 0.6f),
-	                                                      FVector2D(1.0f, 1.2f), FMath::Abs(X));
-	ResultY = FMath::Clamp(ResultY, -1.0f, 1.0f);
-	float ResultX = X * FMath::GetMappedRangeValueClamped(FVector2D(0.0f, 0.6f),
+	float ResultY = X * FMath::GetMappedRangeValueClamped(FVector2D(0.0f, 0.6f),
 	                                                      FVector2D(1.0f, 1.2f), FMath::Abs(Y));
+	ResultY = FMath::Clamp(ResultY, -1.0f, 1.0f);
+	float ResultX = Y * FMath::GetMappedRangeValueClamped(FVector2D(0.0f, 0.6f),
+	                                                      FVector2D(1.0f, 1.2f), FMath::Abs(X));
 	ResultX = FMath::Clamp(ResultX, -1.0f, 1.0f);
 	return TPair<float, float>(ResultY, ResultX);
 }
@@ -45,7 +48,7 @@ FVector UALSMathLibrary::GetCapsuleLocationFromBase(FVector BaseLocation, const 
 }
 
 bool UALSMathLibrary::CapsuleHasRoomCheck(UCapsuleComponent* Capsule, FVector TargetLocation, float HeightOffset,
-                                          float RadiusOffset)
+                                          float RadiusOffset, EDrawDebugTrace::Type DebugType, bool DrawDebugTrace)
 {
 	// Perform a trace to see if the capsule has room to be at the target location.
 	const float ZTarget = Capsule->GetScaledCapsuleHalfHeight_WithoutHemisphere() - RadiusOffset + HeightOffset;
@@ -62,8 +65,23 @@ bool UALSMathLibrary::CapsuleHasRoomCheck(UCapsuleComponent* Capsule, FVector Ta
 	Params.AddIgnoredActor(Capsule->GetOwner());
 
 	FHitResult HitResult;
-	World->SweepSingleByProfile(HitResult, TraceStart, TraceEnd, FQuat::Identity,
-	                            FName(TEXT("ALS_Character")), FCollisionShape::MakeSphere(Radius), Params);
+	const FCollisionShape SphereCollisionShape = FCollisionShape::MakeSphere(Radius);
+	const bool bHit = World->SweepSingleByChannel(HitResult, TraceStart, TraceEnd, FQuat::Identity,
+	                                              ECC_Visibility, FCollisionShape::MakeSphere(Radius), Params);
+
+	if (DrawDebugTrace)
+	{
+		UALSDebugComponent::DrawDebugSphereTraceSingle(World,
+		                                               TraceStart,
+		                                               TraceEnd,
+		                                               SphereCollisionShape,
+		                                               DebugType,
+		                                               bHit,
+		                                               HitResult,
+		                                               FLinearColor(0.130706f, 0.896269f, 0.144582f, 1.0f),  // light green
+		                                               FLinearColor(0.932733f, 0.29136f, 1.0f, 1.0f),        // light purple
+		                                               1.0f);
+	}
 
 	return !(HitResult.bBlockingHit || HitResult.bStartPenetrating);
 }
@@ -77,8 +95,10 @@ bool UALSMathLibrary::AngleInRange(float Angle, float MinAngle, float MaxAngle, 
 	return Angle >= MinAngle + Buffer && Angle <= MaxAngle - Buffer;
 }
 
-EALSMovementDirection UALSMathLibrary::CalculateQuadrant(EALSMovementDirection Current, float FRThreshold, float FLThreshold,
-                                                         float BRThreshold, float BLThreshold, float Buffer, float Angle)
+EALSMovementDirection UALSMathLibrary::CalculateQuadrant(EALSMovementDirection Current, float FRThreshold,
+                                                         float FLThreshold,
+                                                         float BRThreshold, float BLThreshold, float Buffer,
+                                                         float Angle)
 {
 	// Take the input angle and determine its quadrant (direction). Use the current Movement Direction to increase or
 	// decrease the buffers on the angle ranges for each quadrant.
