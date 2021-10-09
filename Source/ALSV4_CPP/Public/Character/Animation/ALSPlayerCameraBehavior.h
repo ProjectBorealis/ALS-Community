@@ -1,5 +1,5 @@
 // Project:         Advanced Locomotion System V4 on C++
-// Copyright:       Copyright (C) 2020 Doğa Can Yanıkoğlu
+// Copyright:       Copyright (C) 2021 Doğa Can Yanıkoğlu
 // License:         MIT License (http://www.opensource.org/licenses/mit-license.php)
 // Source Code:     https://github.com/dyanikoglu/ALSV4_CPP
 // Original Author: Doğa Can Yanıkoğlu
@@ -26,34 +26,35 @@ class ALSV4_CPP_API UALSPlayerCameraBehavior : public UAnimInstance
 	GENERATED_BODY()
 
 public:
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = ALS)
-	AALSBaseCharacter* ControlledPawn = nullptr;
+	void SetRotationMode(EALSRotationMode RotationMode);
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = ALS)
-	APlayerController* PlayerController = nullptr;
-
-protected:
-	void NativeUpdateAnimation(float DeltaSeconds) override;
-
-protected:
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = ALS)
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Read Only Data|Character Information")
 	EALSMovementState MovementState;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = ALS)
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Read Only Data|Character Information")
 	EALSMovementAction MovementAction;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = ALS)
-	EALSRotationMode RotationMode;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Read Only Data|Character Information")
+	bool bLookingDirection = false;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = ALS)
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Read Only Data|Character Information")
+	bool bVelocityDirection = false;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Read Only Data|Character Information")
+	bool bAiming = false;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Read Only Data|Character Information")
 	EALSGait Gait;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = ALS)
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Read Only Data|Character Information")
 	EALSStance Stance;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = ALS)
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Read Only Data|Character Information")
 	EALSViewMode ViewMode;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = ALS)
-	bool bRightShoulder;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Read Only Data|Character Information")
+	bool bRightShoulder = false;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Read Only Data|Character Information")
+	bool bDebugView = false;
 };
