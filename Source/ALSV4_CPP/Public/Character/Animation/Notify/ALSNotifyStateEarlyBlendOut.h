@@ -29,7 +29,7 @@ class ALSV4_CPP_API UALSNotifyStateEarlyBlendOut : public UAnimNotifyState
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = AnimNotify)
-	UAnimMontage* ThisMontage = nullptr;
+	class UAnimMontage* ThisMontage = nullptr;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = AnimNotify)
 	float BlendOutTime = 0.25f;
