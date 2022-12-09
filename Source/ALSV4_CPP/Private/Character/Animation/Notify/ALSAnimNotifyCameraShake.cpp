@@ -8,6 +8,10 @@
 
 #include "Character/Animation/Notify/ALSAnimNotifyCameraShake.h"
 
+#include "Components/SkeletalMeshComponent.h"
+#include "GameFramework/PlayerController.h"
+#include "GameFramework/Pawn.h"
+
 
 void UALSAnimNotifyCameraShake::Notify(USkeletalMeshComponent* MeshComp, UAnimSequenceBase* Animation)
 {

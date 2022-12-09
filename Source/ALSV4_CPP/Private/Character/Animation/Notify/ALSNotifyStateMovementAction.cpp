@@ -8,10 +8,12 @@
 
 #include "Character/Animation/Notify/ALSNotifyStateMovementAction.h"
 
+#include "Components/SkeletalMeshComponent.h"
+
 #include "Character/ALSBaseCharacter.h"
 
 void UALSNotifyStateMovementAction::NotifyBegin(USkeletalMeshComponent* MeshComp, UAnimSequenceBase* Animation,
-                                                float TotalDuration)
+												float TotalDuration)
 {
 	AALSBaseCharacter* BaseCharacter = Cast<AALSBaseCharacter>(MeshComp->GetOwner());
 	if (BaseCharacter)

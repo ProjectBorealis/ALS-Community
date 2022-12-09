@@ -10,6 +10,8 @@
 #include "Character/ALSBaseCharacter.h"
 #include "Library/ALSMathLibrary.h"
 #include "Components/ALSDebugComponent.h"
+#include "TimerManager.h"
+#include "Curves/CurveFloat.h"
 
 #include "Curves/CurveVector.h"
 #include "Components/CapsuleComponent.h"

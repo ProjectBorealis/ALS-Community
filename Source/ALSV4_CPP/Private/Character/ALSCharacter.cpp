@@ -11,6 +11,7 @@
 #include "Engine/StaticMesh.h"
 #include "AI/ALSAIController.h"
 #include "Kismet/GameplayStatics.h"
+#include "Components/SkeletalMeshComponent.h"
 
 AALSCharacter::AALSCharacter(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)

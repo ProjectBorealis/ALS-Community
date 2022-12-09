@@ -6,8 +6,10 @@
 // Contributors:    Doğa Can Yanıkoğlu
 
 #include "AI/ALS_BTTask_SetFocusToPlayer.h"
-#include "Runtime/Engine/Classes/Kismet/GameplayStatics.h"
+
+#include "Kismet/GameplayStatics.h"
 #include "AIController.h"
+#include "Engine/World.h"
 
 UALS_BTTask_SetFocusToPlayer::UALS_BTTask_SetFocusToPlayer()
 {

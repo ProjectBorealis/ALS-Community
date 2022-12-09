@@ -15,6 +15,8 @@
 #include "PhysicalMaterials/PhysicalMaterial.h"
 #include "NiagaraSystem.h"
 #include "NiagaraFunctionLibrary.h"
+#include "Animation/AnimInstance.h"
+#include "Components/SkeletalMeshComponent.h"
 
 
 const FName NAME_Mask_FootstepSound(TEXT("Mask_FootstepSound"));
